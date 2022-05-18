@@ -8,6 +8,8 @@ const compiledCampaign = require('../ethereum/build/Campaign.json')
 
 let accounts
 let factory
+let campaignAddress
+let campaign
 
 beforeEach(async () => {
     accounts = await web3.eth.getAccounts()
@@ -16,7 +18,15 @@ beforeEach(async () => {
         .deploy({data: compiledFactory.bytecode})
         .send({from: accounts[0], gas: '1000000'})
 
+    await factory.methods.createCampaign('100')
+        .send({from: accounts[0], gas: '1000000'})
 
+    addresses = await factory.methods.getDeployedCampaigns().call()
+    campaignAddress = addresses[0]
+    campaign = await web3.eth.Contract(
+        JSON.parse(compiledCampaign.interface),
+        campaignAddress
+    )
 })
 
 
