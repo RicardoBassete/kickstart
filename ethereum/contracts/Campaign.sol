@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.4.17;
 
-contract Campaing {
+contract Campaign {
     struct Request {
         string description;
         uint value;
@@ -22,7 +22,7 @@ contract Campaing {
         _;
     }
 
-    function Campaing(uint minimum, address creator) public {
+    function Campaign(uint minimum, address creator) public {
         manager = creator;
         minimumContribution = minimum;
     }
@@ -64,12 +64,12 @@ contract Campaing {
     }
 }
 
-contract CampaingFactory{
+contract CampaignFactory{
     address[] public deployedCampaings;
 
-    function createCampaing(uint minimum) public {
-        address newCampaing = new Campaing(minimum, msg.sender);
-        deployedCampaings.push(newCampaing);
+    function createCampaign(uint minimum) public {
+        address newCampaign = new Campaign(minimum, msg.sender);
+        deployedCampaings.push(newCampaign);
     }
 
     function getDeployedCampaigns() public view returns(address[]){
@@ -77,5 +77,3 @@ contract CampaingFactory{
     }
 
 }
-
-
