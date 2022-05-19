@@ -13,7 +13,7 @@ async function deploy(){
     const accounts = await web3.eth.getAccounts()
     
     const result = await new web3.eth.Contract(JSON.parse(compiledFactory.interface))
-        .deploy({data: compiledFactory.bytecode, arguments: ['Hi There!!!']})
+        .deploy({data: compiledFactory.bytecode})
         .send({gas: '1000000', from: accounts[0]})
 
     fs.writeFileSync('contract_address.txt', `Contract deployed to: ${result.options.address}`, 'utf-8')
