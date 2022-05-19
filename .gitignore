@@ -1,4 +1,5 @@
 node_modules
 ethereum/build
+contract_address.txt
 .env
 .vscode
