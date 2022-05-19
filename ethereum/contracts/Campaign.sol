@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.4.17;
 
 contract Campaign {
@@ -7,7 +6,7 @@ contract Campaign {
         uint value;
         address recipient;
         bool complete;
-        uint apprrovalCount;
+        uint approvalCount;
         mapping(address => bool) approvals;
     }
 
@@ -34,13 +33,12 @@ contract Campaign {
     }
 
     function createRequest(string description, uint value, address recipient) public restricted {
-        require(approvers[msg.sender]);
         Request memory newRequest = Request({
-            description: description,
-            value: value,
-            recipient: recipient,
-            complete: false,
-            apprrovalCount: 0
+           description: description,
+           value: value,
+           recipient: recipient,
+           complete: false,
+           approvalCount: 0
         });
         requests.push(newRequest);
     }
@@ -52,28 +50,28 @@ contract Campaign {
         require(!request.approvals[msg.sender]);
 
         request.approvals[msg.sender] = true;
-        request.apprrovalCount++;
+        request.approvalCount++;
     }
 
     function finalizeRequest(uint index) public restricted {
         Request storage request = requests[index];
         require(!request.complete);
-        require(request.apprrovalCount > (approversCount / 2));
+        require(request.approvalCount > (approversCount / 2));
+
         request.recipient.transfer(request.value);
         request.complete = true;
     }
 }
 
-contract CampaignFactory{
-    address[] public deployedCampaings;
+contract CampaignFactory {
+    address[] public deployedCampaigns;
 
     function createCampaign(uint minimum) public {
         address newCampaign = new Campaign(minimum, msg.sender);
-        deployedCampaings.push(newCampaign);
+        deployedCampaigns.push(newCampaign);
     }
 
-    function getDeployedCampaigns() public view returns(address[]){
-        return deployedCampaings;
+    function getDeployedCampaigns() public view returns (address[]) {
+        return deployedCampaigns;
     }
-
 }
