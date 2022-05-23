@@ -1,5 +1,7 @@
 node_modules
 ethereum/build
+.next
+
 contract_address.txt
 .env
 .vscode
