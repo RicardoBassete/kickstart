@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "./node_modules/next/dist/bin/next dev",
+    "dev": "node server.js",
     "test": "mocha"
   },
   "keywords": [],
