@@ -56,7 +56,7 @@ class Show extends Component {
       {
         header: `${web3.utils.fromWei(balance, 'ether')} ETH`,
         meta: 'Balance of the Campaign in ETH',
-        description: 'The ammount of WEI avaliable in the campaign',
+        description: 'The ammount of ETH avaliable in the campaign',
         style: { overflowWrap: 'break-word' },
       },
     ]
